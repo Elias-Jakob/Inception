@@ -1,4 +1,27 @@
 version: '3.8'
 
+networks:
+  inception:
+    driver: bridge
+    name: inception
+
+volumes:
+  wordpress_website:
+
 services:
   nginx:
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress_website:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+  wordpress:
+    build: ./requirements/wordpress
+    volumes:
+      - wordpress_website:/var/www/html
+    networks:
+      - inception
