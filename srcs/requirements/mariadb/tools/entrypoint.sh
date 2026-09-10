@@ -1,0 +1,1 @@
+exec mariadbd --user=mysql
