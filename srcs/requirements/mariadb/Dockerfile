@@ -5,4 +5,7 @@ RUN apk update && apk add mariadb \
 
 COPY tools/entrypoint.sh entrypoint.sh
 
+EXPOSE 3306
+
+# USER mysql
 CMD ["/bin/sh", "entrypoint.sh"]

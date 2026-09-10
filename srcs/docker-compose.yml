@@ -5,7 +5,17 @@ networks:
 
 volumes:
   wordpress_website:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ejakob/data/website
   mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ejakob/data/db
 
 secrets:
   db_password:
