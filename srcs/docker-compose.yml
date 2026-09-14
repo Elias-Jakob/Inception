@@ -9,19 +9,25 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/ejakob/data/website
+# TODO: Replace path with /home/ejakob/data as required by the subject
+      device: /Users/eliasjakob/inception_data/wordpress/
   mariadb_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/ejakob/data/db
+# TODO: Replace path with /home/ejakob/data as required by the subject
+      device: /Users/eliasjakob/inception_data/mariadb/
 
 secrets:
   db_password:
     file: ../secrets/db_password.txt
   db_root_password:
     file: ../secrets/db_root_password.txt
+  wp_password:
+    file: ../secrets/wp_password.txt
+  wp_password_ad:
+    file: ../secrets/wp_password_ad.txt
 
 services:
   nginx:
@@ -42,11 +48,15 @@ services:
       - wordpress_website:/var/www/html
     networks:
       - inception
+    depends_on:
+      - mariadb
     env_file:
       - .env
     secrets:
       - db_password
       - db_root_password
+      - wp_password
+      - wp_password_ad
   mariadb:
     build: ./requirements/mariadb
     ports:
@@ -55,3 +65,8 @@ services:
       - mariadb_data:/var/lib/mysql
     networks:
       - inception
+    env_file:
+      - .env
+    secrets:
+      - db_password
+      - db_root_password
