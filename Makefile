@@ -2,7 +2,7 @@ NAME = Inception
 SRC = srcs/docker-compose.yml
 CMD = docker compose
 # TODO: Replace path with /home/ejakob/data as required by the subject
-HOST_DIR = /Users/eliasjakob/inception_data
+HOST_DIR = /home/ejakob/data
 
 all: build up
 
@@ -26,7 +26,7 @@ clean:
 	$(CMD) -f $(SRC) down --volumes --remove-orphans
 
 fclean:
-	rm -rf $(HOST_DIR)
+	sudo rm -rf $(HOST_DIR)
 	$(CMD) -f $(SRC) down --rmi all --volumes --remove-orphans
 
 re: fclean all

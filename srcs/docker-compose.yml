@@ -10,14 +10,14 @@ volumes:
       type: none
       o: bind
 # TODO: Replace path with /home/ejakob/data as required by the subject
-      device: /Users/eliasjakob/inception_data/wordpress/
+      device: /home/ejakob/data/wordpress/
   mariadb_data:
     driver: local
     driver_opts:
       type: none
       o: bind
 # TODO: Replace path with /home/ejakob/data as required by the subject
-      device: /Users/eliasjakob/inception_data/mariadb/
+      device: /home/ejakob/data/mariadb/
 
 secrets:
   db_password:

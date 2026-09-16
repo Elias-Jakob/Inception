@@ -5,7 +5,7 @@ if [ ! -f /var/lib/mysql/data ]; then
 	chown -R mysql:mysql /run/mysqld/
 	touch /run/mysqld/mysqld.sock
 	chown -R mysql:mysql /run/mysqld/mysqld.sock
-	mariadb-install-db --user=mysql \
+	mariadb-install-db --user=root \
 		--datadir=/var/lib/mysql
 	mariadbd --bootstrap <<EOF
 FLUSH PRIVILEGES;
@@ -15,4 +15,4 @@ GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$MYSQL_USER'@'%';
 FLUSH PRIVILEGES;
 EOF
 fi
-exec mariadbd --user=mysql
+exec mariadbd --user=root

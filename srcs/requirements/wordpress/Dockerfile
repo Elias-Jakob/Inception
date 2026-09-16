@@ -5,6 +5,8 @@ RUN apk update && apk add php-fpm \
     php-mysqli \
 		mariadb-client \
     wget \
+    php-phar \
+    php84-iconv \
     tar
 
 RUN mkdir -p /var/www/html && wget https://wordpress.org/latest.tar.gz \
