@@ -30,6 +30,7 @@ secrets:
 services:
   nginx:
     build: ./requirements/nginx
+    image: nginx
     ports:
       - "443:443"
     volumes:
@@ -40,8 +41,10 @@ services:
       - wordpress
     env_file:
       - .env
+    restart: unless-stopped
   wordpress:
     build: ./requirements/wordpress
+    image: wordpress
     volumes:
       - wordpress_website:/var/www/html
     networks:
@@ -55,8 +58,10 @@ services:
       - db_root_password
       - wp_password
       - wp_password_ad
+    restart: unless-stopped
   mariadb:
     build: ./requirements/mariadb
+    image: mariadb
     ports:
       - "3306:3306"
     volumes:
@@ -69,3 +74,4 @@ services:
     secrets:
       - db_password
       - db_root_password
+    restart: unless-stopped
