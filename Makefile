@@ -4,10 +4,12 @@ CMD = docker compose
 # TODO: Replace path with /home/ejakob/data as required by the subject
 HOST_DIR = /home/ejakob/data
 
+include ./srcs/.env
+
 all: build up
 
 build:
-	@mkdir -p $(HOST_DIR)/wordpress $(HOST_DIR)/mariadb
+	@mkdir -p ${DATA_DIR}/wordpress ${DATA_DIR}/mariadb
 	$(CMD) -f $(SRC) build
 
 up:
@@ -26,7 +28,7 @@ clean:
 	$(CMD) -f $(SRC) down --volumes --remove-orphans
 
 fclean:
-	sudo rm -rf $(HOST_DIR)
+	sudo rm -rf ${DATA_DIR}
 	$(CMD) -f $(SRC) down --rmi all --volumes --remove-orphans
 
 re: fclean all
