@@ -12,7 +12,8 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     cd /var/www/html
     wp config create --allow-root --dbname=$DB_NAME --dbuser=$MYSQL_USER --dbpass=$(cat /run/secrets/db_password) --dbhost=mariadb --locale=de_DE
     # wp core download --locale=de_DE --allow-root
-    wp core install --allow-root --url=$DOMAIN_NAME --title=Example --admin_user=$MYSQL_ADMIN --admin_password=$(cat /run/secrets/wp_password_ad) --admin_email=info@example.com
+    wp core install --allow-root --url=$DOMAIN_NAME --title=Inception --admin_user=$WP_ADMIN --admin_password=$(cat /run/secrets/wp_password_ad) --admin_email=$WP_ADMIN@$DOMAIN_NAME
+    wp user create $WP_USER "$WP_USER@$DOMAIN_NAME" --user_pass=$(cat /run/secrets/wp_password) --role=subscriber
 fi
 
 exec /usr/sbin/php-fpm84 -F
